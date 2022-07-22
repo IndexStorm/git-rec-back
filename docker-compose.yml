@@ -1,0 +1,21 @@
+version: "3.9"
+
+networks:
+  app:
+
+services:
+  ml:
+    container_name: git-rec_api
+    restart: always
+    build:
+      context: .
+      dockerfile: docker/ml/Dockerfile
+    environment:
+      FLASK_DEBUG: "${FLASK_DEBUG:?}"
+    networks:
+      - app
+    logging:
+      driver: json-file
+      options:
+        max-size: 4m
+        max-file: "1"
